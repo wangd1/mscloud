@@ -1,0 +1,43 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-serever  # 注册到eureka的服务名
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: git@github.com:wangd1/sc-config.git
+#          search-paths:
+#            - sc-config
+#          username: wangdi1208i@gmail.com
+#          password: 8023love!
+#      label: master
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wangd1/sc-config.git  # https 非ssh
+          skip-ssl-validation: true
+          search-paths:
+            - cloud-config
+  # 消息总线bus需要消息中间件的依赖，这里是RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+# 注册服务到eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+
+# 暴露bus刷新配置的端点bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'

@@ -1,0 +1,15 @@
+server:
+  port: 9990
+
+spring:
+  application:
+    name: nacos-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  #配置nacos的地址
+
+
+# 消费者要调用的服务者
+service-url:
+  nacos-user-service: http://nacos-payment-provider

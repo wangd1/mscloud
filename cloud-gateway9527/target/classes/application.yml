@@ -1,0 +1,46 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: cloud-gateway
+  # gateway网关配置
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名称进行路由
+      routes:
+        - id: payment_route   #路由的id，要求唯一，建议配合服务名
+#          uri: http://localhost:8001  # 匹配后服务的路由地址
+          uri: lb://CLOUD-PAYMENT-SERVICE  # 匹配后服务的路由地址
+          predicates:
+            - Path=/payment/get/**  #断言，路径匹配的进行路由  path断言器
+            - After=2020-03-07T13:03:55.757+08:00[Asia/Shanghai]  #after断言器，后面的时间可用ZonedDateTime.now()获取，jdk8提供
+#            - Before=2020-03-07T13:03:55.757+08:00[Asia/Shanghai]   # 使用和after一致
+#            - Between=2020-03-07T13:03:55.757+08:00[Asia/Shanghai],2020-03-07T13:03:55.757+08:00[Asia/Shanghai]  # 使用和after一致
+#            - Cookie= username,wangdi  # cookie断言器，带cookie路由
+#            - Header=X-Request-Id, \d+  #请求头断言器，请求头必须要有某属性，且对应值为整数的正则表达式。
+#            - Host=**.baidu.com   # host断言
+#            - Method=GET  #方法断言，get或post或put或delete等
+#            - Query=username, \d+  #条件断言，带有参数名，后面的是正则表达式，匹配上才可以
+#          filters:
+#            - AddRequestParameter=X-Request-Id,1024  # 过滤器工厂会在匹配的请求头上加上一对请求头
+
+        - id: payment_route2
+#          uri: http://localhost:8001
+          uri: lb://CLOUD-PAYMENT-SERVICE
+          predicates:
+            - Path=/payment/lb/**
+
+# eureka client配置，注册到注册中心
+eureka:
+  client:
+    register-with-eureka: true  #表示是否将自己注册到eureka，默认true
+    fetch-registry: true  #是否从注册中心抓取已有的注册信息，用于集群配置
+    service-url:
+      defaultZone: http://localhost:7001/eureka/  #单机版
+#      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    prefer-ip-address: true #显示ip地址
+    instance-id: gateway9527
+#debug: false

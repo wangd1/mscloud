@@ -1,0 +1,33 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: cloud-order-feign-hystrix-service
+# eureka client配置，注册到注册中心
+eureka:
+  client:
+    register-with-eureka: true  #表示是否将自己注册到eureka，默认true
+    fetch-registry: true  #是否从注册中心抓取已有的注册信息，用于集群配置
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+#      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+
+# 设置openfeign的超时时间（默认支持ribbon）
+ribbon:
+  # 建立连接所用的时间
+  ReadTimeout: 5000
+  # 建立连接之后从服务器读取资源所用的时间
+  ConnectTimeout: 8000
+
+# feign日志打印配置
+logging:
+  level:
+#    feign以什么级别监控哪个接口
+    com.wang.sc.service.PaymentHystrixService: debug
+#debug: true
+
+# 开启客户端服务降级保护
+feign:
+  hystrix:
+    enabled: true
