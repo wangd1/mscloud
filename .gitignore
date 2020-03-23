@@ -31,13 +31,16 @@ target
 out
 
 # ignore eclipse files
-target
 .project
 .classpath
 .settings
 .factorypath
 .metadata
-.idea
+
+#target,.idea
+/target
+/.idea
+/out
 *.iml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
