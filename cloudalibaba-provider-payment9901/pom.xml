@@ -41,32 +41,6 @@
         </dependency>
     </dependencies>
 
-    <!--<build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <useUniqueVersions>false</useUniqueVersions>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.wang.scalibaba.NacosProviderApplication9901</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>-->
     <build>
         <plugins>
             <plugin>
@@ -82,7 +56,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.2.7.RELEASE</version>
                 <configuration>
-                    <maimClass>com.wang.scalibaba.NacosProviderApplication9901</maimClass>
+                    <mainClass>com.wang.scalibaba.NacosProviderApplication9901</mainClass>
                 </configuration>
                 <executions>
                     <execution>
