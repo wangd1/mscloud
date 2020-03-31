@@ -2,3 +2,4 @@
 
 springcloud learn
 local
+remote
