@@ -6,3 +6,4 @@ remote
 
 change from dev
 change from local
+springcloud git test
